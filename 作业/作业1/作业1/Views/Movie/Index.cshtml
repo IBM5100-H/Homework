@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Movies.User_info>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@foreach (var item in Model)
+{
+<p>
+    @item.Name &nbsp; @item.Age &nbsp;  @item.Company
+</p>
+
+}
+
