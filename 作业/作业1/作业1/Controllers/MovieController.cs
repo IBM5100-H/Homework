@@ -21,5 +21,14 @@ namespace 作业1.Controllers
         {
             return View();
         }
+
+        public ActionResult Select1()
+        {
+            return View();
+        }
+        public ActionResult Select2()
+        {
+            return View();
+        }
     }
 }
