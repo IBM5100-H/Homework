@@ -5,11 +5,25 @@
 
 <h2>Index</h2>
 
-@foreach (var item in Model)
-{
-<p>
-    @item.Name &nbsp; @item.Age &nbsp;  @item.Company
-</p>
+@Html.ActionLink("添加", "Insert");
 
-}
 
+<table>
+    <tr>
+        <th>Name</th>        
+        <th>Age</th>
+        <th>Company</th>
+        <th>操作</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td> @item.Name</td>
+            <td>@item.Age</td>
+            <td>  @item.Company</td>
+            <td><a href="Edit/@item.Id">修改</a></td>
+            <td>@Html.ActionLink("删除", "Delete/" + item.Id + "") </td>
+        </tr>
+    }
+</table>
