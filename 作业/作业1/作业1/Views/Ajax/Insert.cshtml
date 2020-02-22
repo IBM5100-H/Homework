@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "Insert";
+}
+
+<h2>Insert</h2>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(function () {
+        $("#btnsubmit").click(function () {
+            Name = $("#Name").val();
+            Age = $("#Age").val();
+            Company = $("#Company").val();
+            $.post("/Ajax/Insert", {Name:Name,Age:Age,Company:Company}, function (response) {
+                if (response == "true") {
+                    alert("添加成功")
+                    window.location.href = "/Ajax/Index";
+                }
+                else {
+                    alert("添加失败")
+                }
+            })
+
+        })
+    })
+</script>
+
+<table>
+    <tr>
+        <td>Name</td>
+        <td><input type="text" name="Name" id="Name" /></td>
+    </tr>
+    <tr>
+        <td>Age</td>
+        <td><input type="text" name="Age" id="Age" /></td>
+    </tr>
+    <tr>
+        <td>Company</td>
+        <td><input type="text" name="Company" id="Company" /></td>
+    </tr>
+    <tr>
+        <td>
+            <input type="button" id="btnsubmit"  value="添加" />
+        </td>
+    </tr>
+</table>

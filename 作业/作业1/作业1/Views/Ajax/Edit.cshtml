@@ -1,0 +1,47 @@
+﻿@model Movies.User_info
+@{
+    ViewBag.Title = "Edit";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(function () {
+        $("#btnsubmit").click(function () {
+            Name = $("#Name").val();
+            Age = $("#Age").val();
+            Company = $("#Company").val();
+            Id = $("#Id").val();
+            $.post("/Ajax/Edit", { Id: Id, Name: Name, Age: Age, Company: Company }, function (response) {
+                if (response == "true") {
+                    alert("添加成功")
+                    window.location.href = "/Ajax/Index";
+                }
+                else {
+                    alert("添加失败")
+                }
+            })
+        })
+    })
+
+</script>
+
+<h2>Edit</h2>
+<input type="hidden" id="Id" name="Id" value="@Model.Id" />
+<table>
+    <tr>
+        <td>Name</td>
+        <td><input type="text" name="Name" id="Name" value="@Model.Name" /></td>
+    </tr>
+    <tr>
+        <td>Age</td>
+        <td><input type="text" name="Age" id="Age" value="@Model.Age" /></td>
+    </tr>
+    <tr>
+        <td>Company</td>
+        <td><input type="text" name="Company" id="Company" value="@Model.Company" /></td>
+    </tr>
+    <tr>
+        <td>
+            <input type="button" id="btnsubmit" value="修改" />
+        </td>
+    </tr>
+</table>

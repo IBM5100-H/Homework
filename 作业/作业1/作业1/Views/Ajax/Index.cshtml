@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+<script>
+    $(function () {
+        $.get("/Ajax/Indexs", {}, function (response) {
+            for (i = 0; i <=response.length; i++){
+            $("tbody").append("<tr><td>"+(i+1)+"</td><td>"+response[i].Name+"</td><td>"+response[i].Age+"</td><td>"+response[i].Company+"</td><td><a href='/Ajax/Edit/"+response[i].Id+"'>修改<a><a onclick='deleted("+response[i].Id+")'>删除<a></td></tr>")
+        }
+        })
+    })
+
+    function deleted(Id)
+    {
+        $.post("/Ajax/Deleted", { Id: Id }, function (response) {
+             if (response == "true") {
+                    alert("删除成功")
+                    window.location.href = "/Ajax/Index";
+                }
+                else {
+                    alert("删除失败")
+                }
+        })
+    }
+</script>
+<h2>Index</h2>
+<a href="/Ajax/Insert">添加</a>
+<table border="1">
+    <thead>
+        <tr>
+            <th>i</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Company</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+   <tbody>
+
+   </tbody>
+</table>
+
