@@ -4,13 +4,35 @@
     <EntitySetMapping Name="User_info">
       <EntityTypeMapping TypeName="itcastModel.User_info">
         <MappingFragment StoreEntitySet="User_info">
+          <ScalarProperty Name="AdressId" ColumnName="AdressId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Age" ColumnName="Age" />
           <ScalarProperty Name="Number" ColumnName="Number" />
           <ScalarProperty Name="Company" ColumnName="Company" />
-          <ScalarProperty Name="Adress" ColumnName="Adress" />
           <ScalarProperty Name="phone" ColumnName="phone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Adress">
+      <EntityTypeMapping TypeName="itcastModel.Adress">
+        <MappingFragment StoreEntitySet="Adress">
+          <ScalarProperty Name="AdressName" ColumnName="AdressName" />
+          <ScalarProperty Name="AdressId" ColumnName="AdressId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VMovie">
+      <EntityTypeMapping TypeName="itcastModel.VMovie">
+        <MappingFragment StoreEntitySet="VMovie">
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="AdressName" ColumnName="AdressName" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AdressId" ColumnName="AdressId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

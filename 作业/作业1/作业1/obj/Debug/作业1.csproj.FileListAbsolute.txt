@@ -61,6 +61,8 @@ D:\Users\C#\大三下\课程设计\作业\作业1\作业1\obj\Debug\作业1.cspr
 D:\Users\C#\大三下\课程设计\作业\作业1\作业1\obj\Debug\作业1.csproj.CopyComplete
 D:\Users\C#\大三下\课程设计\作业\作业1\作业1\obj\Debug\作业1.dll
 D:\Users\C#\大三下\课程设计\作业\作业1\作业1\obj\Debug\作业1.pdb
+D:\Users\Git\Homework\作业\作业1\作业1\obj\Debug\作业1.csprojAssemblyReference.cache
+D:\Users\Git\Homework\作业\作业1\作业1\obj\Debug\作业1.csproj.CoreCompileInputs.cache
 D:\Users\Git\Homework\作业\作业1\作业1\bin\作业1.dll.config
 D:\Users\Git\Homework\作业\作业1\作业1\bin\作业1.dll
 D:\Users\Git\Homework\作业\作业1\作业1\bin\作业1.pdb
@@ -119,8 +121,10 @@ D:\Users\Git\Homework\作业\作业1\作业1\bin\zh-Hans\System.Web.Webpages.Dep
 D:\Users\Git\Homework\作业\作业1\作业1\bin\zh-Hans\System.Web.Webpages.Razor.resources.dll
 D:\Users\Git\Homework\作业\作业1\作业1\bin\zh-Hans\System.Web.Helpers.resources.dll
 D:\Users\Git\Homework\作业\作业1\作业1\bin\zh-Hans\System.Web.Mvc.resources.dll
-D:\Users\Git\Homework\作业\作业1\作业1\obj\Debug\作业1.csprojAssemblyReference.cache
-D:\Users\Git\Homework\作业\作业1\作业1\obj\Debug\作业1.csproj.CoreCompileInputs.cache
 D:\Users\Git\Homework\作业\作业1\作业1\obj\Debug\作业1.csproj.CopyComplete
 D:\Users\Git\Homework\作业\作业1\作业1\obj\Debug\作业1.dll
 D:\Users\Git\Homework\作业\作业1\作业1\obj\Debug\作业1.pdb
+D:\Users\Git\Homework\作业\作业1\作业1\bin\Webdiyer.MvcPager.dll
+D:\Users\Git\Homework\作业\作业1\作业1\bin\Webdiyer.MvcPager.xml
+D:\Users\Git\Homework\作业\作业1\作业1\bin\zh-CHS\Webdiyer.MvcPager.resources.dll
+D:\Users\Git\Homework\作业\作业1\作业1\bin\zh-CHT\Webdiyer.MvcPager.resources.dll

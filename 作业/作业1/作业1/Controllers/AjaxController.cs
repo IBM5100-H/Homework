@@ -58,18 +58,19 @@ namespace 作业1.Controllers
         [HttpGet]
         public ActionResult Edit(string Id)
         {
+
             User_info user = itcast.User_info.Find(Convert.ToInt32(Id));
             
             return View(user);
         }
         [HttpPost]
-        public ActionResult Edit(string Id,string Name,string Age,string Company)
+        public ActionResult Edit(User_info user)
         {
-            User_info user = new User_info() ;
-            user.Id = Convert.ToInt32(Id);
-            user.Name = Name;
-            user.Age =Convert.ToInt32( Age);
-            user.Company = Company;
+            //User_info user = new User_info() ;
+            //user.Id = Convert.ToInt32(Id);
+            //user.Name = Name;
+            //user.Age =Convert.ToInt32( Age);
+            //user.Company = Company;
             itcast.Entry<User_info>(user).State = System.Data.Entity.EntityState.Modified;
             int i= itcast.SaveChanges();
             if (i > 0)

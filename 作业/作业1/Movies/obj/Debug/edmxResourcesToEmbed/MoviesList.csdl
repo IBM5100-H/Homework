@@ -9,10 +9,33 @@
     <Property Name="Age" Type="Int32" />
     <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="AdressId" Type="Int32" />
   </EntityType>
   <EntityContainer Name="itcastEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="User_info" EntityType="Self.User_info" />
+    <EntitySet Name="Adress" EntityType="itcastModel.Adress" />
+    <EntitySet Name="VMovie" EntityType="itcastModel.VMovie" />
   </EntityContainer>
+  <EntityType Name="Adress">
+    <Key>
+      <PropertyRef Name="AdressId" />
+    </Key>
+    <Property Name="AdressId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AdressName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="VMovie">
+    <Key>
+      <PropertyRef Name="AdressId" />
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="AdressId" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Age" Type="Int32" />
+    <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AdressName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

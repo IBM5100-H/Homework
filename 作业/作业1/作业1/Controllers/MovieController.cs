@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Movies;
-
+using Webdiyer.WebControls.Mvc;
 
 
 namespace 作业1.Controllers
@@ -13,10 +13,51 @@ namespace 作业1.Controllers
     {
         // GET: Movie
         itcastEntities itcast = new itcastEntities();
-        public ActionResult Index()
+
+        public ActionResult Index(int tid=1)
         {
-            var list = itcast.User_info;
-            return View(list);
+
+
+            #region linq lambda sql
+            //var list = itcast.Database.SqlQuery<MovieDetailMV>("");
+
+            //var list = itcast.User_info;
+            var linqlist = from m in itcast.User_info
+                           join t in itcast.Adress on m.AdressId equals t.AdressId
+                           select new MovieDetailMV
+                           {
+                               Id = m.Id,
+                               AdressId = t.AdressId,
+                               Name = m.Name,
+                               Age = m.Age,
+                               Company = m.Company,
+                               AdressName = t.AdressName
+
+                           };
+
+            var lambda = itcast.User_info.Join(itcast.Adress, m => m.AdressId, t => t.AdressId, (m, t) => new MovieDetailMV()
+            {
+                Id = m.Id,
+                AdressId = t.AdressId,
+                Name = m.Name,
+                Age = m.Age,
+                Company = m.Company,
+                AdressName = t.AdressName
+            }
+                );
+            #endregion
+            var vmodel = itcast.VMovie.ToList(); ;
+            string Name = Request.Form["txtName"];
+            string Age = Request.Form["txtAge"];
+            if (!string.IsNullOrEmpty(Name))
+            {
+                vmodel = vmodel.Where(m => m.Name.Contains(Name)).ToList();
+            }
+            if (!string.IsNullOrEmpty(Age))
+            {
+                vmodel = vmodel.Where(m => m.Age ==Convert.ToInt32( Age)).ToList();
+            }
+            return View(vmodel.ToPagedList(tid,3));
         }
 
         public ActionResult Delete(string Id)

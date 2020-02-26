@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Movies.User_info>
+﻿@model PagedList<Movies.VMovie>
+@using Webdiyer.WebControls.Mvc;
 @{
     ViewBag.Title = "Index";
 }
@@ -8,22 +9,28 @@
 @Html.ActionLink("添加", "Insert");
 
 
-<table>
-    <tr>
-        <th>Name</th>        
-        <th>Age</th>
-        <th>Company</th>
-        <th>操作</th>
-    </tr>
-    @foreach (var item in Model)
-    {
-
+<form method="post" action="/Movie/Index">
+    Name:<input type="text" name="txtName" /> Age:<input type="text" name="txtAge" /> <input type="submit" />
+    <table border="1">
         <tr>
-            <td> @item.Name</td>
-            <td>@item.Age</td>
-            <td>  @item.Company</td>
-            <td><a href="Edit/@item.Id">修改</a></td>
-            <td>@Html.ActionLink("删除", "Delete/" + item.Id + "") </td>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Company</th>
+            <th>AdressName</th>
+            <th>操作</th>
         </tr>
-    }
-</table>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td> @item.Name</td>
+                <td>@item.Age</td>
+                <td>  @item.Company</td>
+                <td>  @item.AdressName</td>
+                <td><a href="/Movie/Edit/@item.Id">修改</a></td>
+                <td>@Html.ActionLink("删除", "/Movie/Delete/" + item.Id + "") </td>
+            </tr>
+        }
+    </table>
+    @Html.Pager(Model).Options(o => o.SetPageIndexParameterName("tid").SetHorizontalAlign("left").SetPagerItemTemplate("&nbsp;{0}"))
+</form>

@@ -19,7 +19,7 @@ namespace Movies
         public Nullable<int> Age { get; set; }
         public string Number { get; set; }
         public string Company { get; set; }
-        public string Adress { get; set; }
         public string phone { get; set; }
+        public Nullable<int> AdressId { get; set; }
     }
 }

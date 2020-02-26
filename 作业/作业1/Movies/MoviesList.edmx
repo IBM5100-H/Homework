@@ -4,7 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="itcastModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="itcastModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Adress">
+          <Key>
+            <PropertyRef Name="AdressId" />
+          </Key>
+          <Property Name="AdressId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdressName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="User_info">
           <Key>
             <PropertyRef Name="Id" />
@@ -14,14 +21,44 @@
           <Property Name="Age" Type="int" />
           <Property Name="Number" Type="varchar" MaxLength="50" />
           <Property Name="Company" Type="varchar" MaxLength="50" />
-          <Property Name="Adress" Type="varchar" MaxLength="50" />
+          <Property Name="AdressId" Type="int" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“itcast.dbo.VMovie”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="VMovie">
+          <Key>
+            <PropertyRef Name="AdressId" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="AdressId" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Number" Type="varchar" MaxLength="50" />
+          <Property Name="Company" Type="varchar" MaxLength="50" />
+          <Property Name="Expr1" Type="int" />
+          <Property Name="AdressName" Type="nvarchar" MaxLength="50" />
           <Property Name="phone" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="itcastModelStoreContainer">
+          <EntitySet Name="Adress" EntityType="Self.Adress" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User_info" EntityType="Self.User_info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VMovie" EntityType="Self.VMovie" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VMovie].[AdressId] AS [AdressId], 
+    [VMovie].[Id] AS [Id], 
+    [VMovie].[Name] AS [Name], 
+    [VMovie].[Age] AS [Age], 
+    [VMovie].[Number] AS [Number], 
+    [VMovie].[Company] AS [Company], 
+    [VMovie].[Expr1] AS [Expr1], 
+    [VMovie].[AdressName] AS [AdressName], 
+    [VMovie].[phone] AS [phone]
+    FROM [dbo].[VMovie] AS [VMovie]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="itcastModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -34,12 +71,35 @@
           <Property Name="Age" Type="Int32" />
           <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AdressId" Type="Int32" />
         </EntityType>
         <EntityContainer Name="itcastEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="User_info" EntityType="Self.User_info" />
+          <EntitySet Name="Adress" EntityType="itcastModel.Adress" />
+          <EntitySet Name="VMovie" EntityType="itcastModel.VMovie" />
         </EntityContainer>
+        <EntityType Name="Adress">
+          <Key>
+            <PropertyRef Name="AdressId" />
+          </Key>
+          <Property Name="AdressId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdressName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VMovie">
+          <Key>
+            <PropertyRef Name="AdressId" />
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="AdressId" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AdressName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -49,13 +109,35 @@
           <EntitySetMapping Name="User_info">
             <EntityTypeMapping TypeName="itcastModel.User_info">
               <MappingFragment StoreEntitySet="User_info">
+                <ScalarProperty Name="AdressId" ColumnName="AdressId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="Company" ColumnName="Company" />
-                <ScalarProperty Name="Adress" ColumnName="Adress" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Adress">
+            <EntityTypeMapping TypeName="itcastModel.Adress">
+              <MappingFragment StoreEntitySet="Adress">
+                <ScalarProperty Name="AdressName" ColumnName="AdressName" />
+                <ScalarProperty Name="AdressId" ColumnName="AdressId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VMovie">
+            <EntityTypeMapping TypeName="itcastModel.VMovie">
+              <MappingFragment StoreEntitySet="VMovie">
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="AdressName" ColumnName="AdressName" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AdressId" ColumnName="AdressId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -12,11 +12,11 @@
             Id = $("#Id").val();
             $.post("/Ajax/Edit", { Id: Id, Name: Name, Age: Age, Company: Company }, function (response) {
                 if (response == "true") {
-                    alert("添加成功")
+                    alert("修改成功")
                     window.location.href = "/Ajax/Index";
                 }
                 else {
-                    alert("添加失败")
+                    alert("修改失败")
                 }
             })
         })
