@@ -14,7 +14,7 @@ namespace 作业1.Controllers
         // GET: Movie
         itcastEntities itcast = new itcastEntities();
 
-        public ActionResult Index(string AdressId, string OccupationId, int tid=1)
+        public ActionResult Index(string AdressId, string OccupationId, int tid = 1)
         {
 
 
@@ -48,39 +48,43 @@ namespace 作业1.Controllers
             #endregion
 
             var adress = itcast.Adress;
-            ViewBag.adress = adress;
+            ViewBag.adress = adress;                       //查询所有Adress                                 
             var occupation = itcast.occupation;
-            ViewBag.occupation = occupation;
-            ViewBag.OccupationId = "0";
-            ViewBag.AdressId = "0";
+            ViewBag.occupation = occupation;               //查询所有occupation
+            ViewBag.OccupationId = "0";                    //防止第一次访问无法匹配路由
+            ViewBag.AdressId = "0";                        //同上
 
             var vmodel = itcast.VMovie.ToList(); ;
             string Name = Request.Form["txtName"];
             string Age = Request.Form["txtAge"];
+
             if (!string.IsNullOrEmpty(Name))
             {
                 vmodel = vmodel.Where(m => m.Name.Contains(Name)).ToList();
             }
+
             if (!string.IsNullOrEmpty(Age))
             {
-                vmodel = vmodel.Where(m => m.Age ==Convert.ToInt32( Age)).ToList();
+                vmodel = vmodel.Where(m => m.Age == Convert.ToInt32(Age)).ToList();
             }
 
-
-            if (!string.IsNullOrEmpty(AdressId) && AdressId!= ViewBag.AdressId && AdressId != "0")
-            {             
-                    vmodel = vmodel.Where(m => m.AdressId == Convert.ToInt32(AdressId)).ToList();
-                    ViewBag.AdressId = AdressId;                  
-
+            if (!string.IsNullOrEmpty(AdressId) && AdressId != ViewBag.AdressId && AdressId != "0")
+            {
+                vmodel = vmodel.Where(m => m.AdressId == Convert.ToInt32(AdressId)).ToList();
+                ViewBag.AdressId = AdressId;
+                var AdressName = itcast.Adress.Find(Convert.ToInt32(AdressId));
+                ViewBag.AdressName = AdressName.AdressName;
             }
-            if (!string.IsNullOrEmpty(OccupationId)&& OccupationId!= ViewBag.OccupationId && OccupationId != "0")
-            {             
+
+            if (!string.IsNullOrEmpty(OccupationId) && OccupationId != ViewBag.OccupationId && OccupationId != "0")
+            {
                 vmodel = vmodel.Where(m => m.OccupationId == Convert.ToInt32(OccupationId)).ToList();
                 ViewBag.OccupationId = OccupationId;
+                var OccupationName = itcast.occupation.Find(Convert.ToInt32(OccupationId));
+                ViewBag.OccupationName = OccupationName.OccupationName;
             }
 
-
-            return View(vmodel.ToPagedList(tid,5));
+            return View(vmodel.ToPagedList(tid, 5));
         }
 
         public ActionResult Delete(string Id)
@@ -128,6 +132,8 @@ namespace 作业1.Controllers
         [HttpGet]
         public ActionResult Insert()
         {
+            ViewBag.AdressName = itcast.Adress;
+            ViewBag.OccupationName = itcast.occupation;
             return View();
         }
 

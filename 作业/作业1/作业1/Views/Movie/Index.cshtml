@@ -6,10 +6,9 @@
 
 <h2>Index</h2>
 
-@Html.ActionLink("添加", "Insert");
+@Html.ActionLink("添加", "Insert")
 <br />
 <br />
-
 
 
 <form method="post" action="/Movie/Index">
@@ -17,19 +16,19 @@
     <a href="/Movie/Index/0-@ViewBag.OccupationId">不限</a>
     @foreach (var item in ViewBag.adress)
     {
-        <a href="/Movie/Index/@item.AdressId-@ViewBag.OccupationId">@item.AdressName</a>
+        <a  href="/Movie/Index/@item.AdressId-@ViewBag.OccupationId">@item.AdressName</a>
     }
     <br />
 
     <a href="/Movie/Index/@ViewBag.AdressId-0">不限</a>
     @foreach (var item in ViewBag.occupation)
     {
-        <a href="/Movie/Index/@ViewBag.AdressId-@item.OccupationId">@item.OccupationName</a>
+        <a  href="/Movie/Index/@ViewBag.AdressId-@item.OccupationId">@item.OccupationName</a>
     }
     <br />
     Name:<input type="text" name="txtName" /> Age:<input type="text" name="txtAge" /> <input type="submit" />
     <br />
-
+    类别 <div id="classes">@ViewBag.AdressName  @ViewBag.OccupationName </div>
     <br />
     <table border="1">
         <tr>
