@@ -14,14 +14,14 @@
 
 <form method="post" action="/Movie/Index">
 
-    <a href="/Movie/Index/null-@ViewBag.OccupationId">不限</a>
+    <a href="/Movie/Index/0-@ViewBag.OccupationId">不限</a>
     @foreach (var item in ViewBag.adress)
     {
         <a href="/Movie/Index/@item.AdressId-@ViewBag.OccupationId">@item.AdressName</a>
     }
     <br />
 
-    <a href="/Movie/Index/@ViewBag.AdressId-null">不限</a>
+    <a href="/Movie/Index/@ViewBag.AdressId-0">不限</a>
     @foreach (var item in ViewBag.occupation)
     {
         <a href="/Movie/Index/@ViewBag.AdressId-@item.OccupationId">@item.OccupationName</a>

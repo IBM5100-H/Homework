@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/Content/layui/layui.js"></script>
+    <script>
+        //使用一个table组件
+        layui.use('table', function () {
+            //声明一个变量 它代表table组件
+            var table = layui.table;
+            //初始化组件
+            table.render({
+                //
+                elem: '#tdMovie',
+                toolbar: '#toolbarDemo',
+                url: '/layerui/read/'//远程数据接口   出数据
+                , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                , cols: [[
+                 { type: 'radio' },
+                 { field: 'Name', width: 80, title: 'Name', sort: true }
+                , { field: 'AdressName', width: 80, title: 'AdressName' }
+                , { field: 'Age', width: 80, title: 'Age', sort: true }
+                , { field: 'Company', title: 'Company', width: '30%', minWidth: 100 } //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                , { field: 'OccupationName', title: 'OccupationName', sort: true }
+               ]]
+            });
+        });
+
+
+    </script>
+    <script type="text/html" id="toolbarDemo">
+        <div class="layui-btn-container">
+            <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
+        </div>
+    </script>
+</head>
+<body>
+    所有组件类前端框架 都是通过Ajax来进行数据加载。
+    组件类型框架原理：
+    1需要将页面的一个html元素  初始化为一个组件
+    2通过远程访问接口的方式 获取相应的数据
+    3为组件附上数据
+    4完成组件的渲染
+    <table id="tdMovie"></table>
+
+</body>
+</html>

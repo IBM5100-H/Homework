@@ -67,13 +67,13 @@ namespace 作业1.Controllers
             }
 
 
-            if (!string.IsNullOrEmpty(AdressId) && AdressId!= ViewBag.AdressId && AdressId != "null")
+            if (!string.IsNullOrEmpty(AdressId) && AdressId!= ViewBag.AdressId && AdressId != "0")
             {             
                     vmodel = vmodel.Where(m => m.AdressId == Convert.ToInt32(AdressId)).ToList();
                     ViewBag.AdressId = AdressId;                  
 
             }
-            if (!string.IsNullOrEmpty(OccupationId)&& OccupationId!= ViewBag.OccupationId && OccupationId != "null")
+            if (!string.IsNullOrEmpty(OccupationId)&& OccupationId!= ViewBag.OccupationId && OccupationId != "0")
             {             
                 vmodel = vmodel.Where(m => m.OccupationId == Convert.ToInt32(OccupationId)).ToList();
                 ViewBag.OccupationId = OccupationId;
