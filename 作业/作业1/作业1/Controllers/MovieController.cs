@@ -14,7 +14,7 @@ namespace 作业1.Controllers
         // GET: Movie
         itcastEntities itcast = new itcastEntities();
 
-        public ActionResult Index(int tid=1)
+        public ActionResult Index(string AdressId, string OccupationId, int tid=1)
         {
 
 
@@ -46,6 +46,14 @@ namespace 作业1.Controllers
             }
                 );
             #endregion
+
+            var adress = itcast.Adress;
+            ViewBag.adress = adress;
+            var occupation = itcast.occupation;
+            ViewBag.occupation = occupation;
+            ViewBag.OccupationId = "0";
+            ViewBag.AdressId = "0";
+
             var vmodel = itcast.VMovie.ToList(); ;
             string Name = Request.Form["txtName"];
             string Age = Request.Form["txtAge"];
@@ -57,7 +65,22 @@ namespace 作业1.Controllers
             {
                 vmodel = vmodel.Where(m => m.Age ==Convert.ToInt32( Age)).ToList();
             }
-            return View(vmodel.ToPagedList(tid,3));
+
+
+            if (!string.IsNullOrEmpty(AdressId) && AdressId!= ViewBag.AdressId && AdressId != "null")
+            {             
+                    vmodel = vmodel.Where(m => m.AdressId == Convert.ToInt32(AdressId)).ToList();
+                    ViewBag.AdressId = AdressId;                  
+
+            }
+            if (!string.IsNullOrEmpty(OccupationId)&& OccupationId!= ViewBag.OccupationId && OccupationId != "null")
+            {             
+                vmodel = vmodel.Where(m => m.OccupationId == Convert.ToInt32(OccupationId)).ToList();
+                ViewBag.OccupationId = OccupationId;
+            }
+
+
+            return View(vmodel.ToPagedList(tid,5));
         }
 
         public ActionResult Delete(string Id)

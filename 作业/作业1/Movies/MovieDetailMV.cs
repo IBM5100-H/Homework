@@ -14,5 +14,6 @@ namespace Movies
         public Nullable<int> Age { get; set; }
         public string Company { get; set; }
         public string AdressName { get; set; }
+        public string OccupationName { get; set; }
     }
 }

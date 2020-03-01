@@ -1,19 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="itcastModelStoreContainer" CdmEntityContainer="itcastEntities">
-    <EntitySetMapping Name="User_info">
-      <EntityTypeMapping TypeName="itcastModel.User_info">
-        <MappingFragment StoreEntitySet="User_info">
-          <ScalarProperty Name="AdressId" ColumnName="AdressId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Age" ColumnName="Age" />
-          <ScalarProperty Name="Number" ColumnName="Number" />
-          <ScalarProperty Name="Company" ColumnName="Company" />
-          <ScalarProperty Name="phone" ColumnName="phone" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Adress">
       <EntityTypeMapping TypeName="itcastModel.Adress">
         <MappingFragment StoreEntitySet="Adress">
@@ -22,17 +9,38 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="VMovie">
-      <EntityTypeMapping TypeName="itcastModel.VMovie">
-        <MappingFragment StoreEntitySet="VMovie">
-          <ScalarProperty Name="phone" ColumnName="phone" />
-          <ScalarProperty Name="AdressName" ColumnName="AdressName" />
+    <EntitySetMapping Name="occupation">
+      <EntityTypeMapping TypeName="itcastModel.occupation">
+        <MappingFragment StoreEntitySet="occupation">
+          <ScalarProperty Name="CreatTime" ColumnName="CreatTime" />
+          <ScalarProperty Name="OccupationName" ColumnName="OccupationName" />
+          <ScalarProperty Name="OccupationId" ColumnName="OccupationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_info">
+      <EntityTypeMapping TypeName="itcastModel.User_info">
+        <MappingFragment StoreEntitySet="User_info">
+          <ScalarProperty Name="OccupationId" ColumnName="OccupationId" />
+          <ScalarProperty Name="AdressId" ColumnName="AdressId" />
           <ScalarProperty Name="Company" ColumnName="Company" />
-          <ScalarProperty Name="Number" ColumnName="Number" />
           <ScalarProperty Name="Age" ColumnName="Age" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VMovie">
+      <EntityTypeMapping TypeName="itcastModel.VMovie">
+        <MappingFragment StoreEntitySet="VMovie">
+          <ScalarProperty Name="OccupationId" ColumnName="OccupationId" />
           <ScalarProperty Name="AdressId" ColumnName="AdressId" />
+          <ScalarProperty Name="OccupationName" ColumnName="OccupationName" />
+          <ScalarProperty Name="AdressName" ColumnName="AdressName" />
+          <ScalarProperty Name="Company" ColumnName="Company" />
+          <ScalarProperty Name="Age" ColumnName="Age" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

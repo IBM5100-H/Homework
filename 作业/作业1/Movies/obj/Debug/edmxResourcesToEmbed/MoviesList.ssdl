@@ -7,6 +7,14 @@
     <Property Name="AdressId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="AdressName" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="occupation">
+    <Key>
+      <PropertyRef Name="OccupationId" />
+    </Key>
+    <Property Name="OccupationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OccupationName" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatTime" Type="datetime" />
+  </EntityType>
   <EntityType Name="User_info">
     <Key>
       <PropertyRef Name="Id" />
@@ -14,42 +22,41 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" />
     <Property Name="Age" Type="int" />
-    <Property Name="Number" Type="varchar" MaxLength="50" />
     <Property Name="Company" Type="varchar" MaxLength="50" />
     <Property Name="AdressId" Type="int" />
-    <Property Name="phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="OccupationId" Type="int" />
   </EntityType>
   <!--生成过程中发现错误:
 警告 6002: 表/视图“itcast.dbo.VMovie”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
   <EntityType Name="VMovie">
     <Key>
-      <PropertyRef Name="AdressId" />
       <PropertyRef Name="Id" />
+      <PropertyRef Name="AdressId" />
+      <PropertyRef Name="OccupationId" />
     </Key>
-    <Property Name="AdressId" Type="int" Nullable="false" />
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" />
     <Property Name="Age" Type="int" />
-    <Property Name="Number" Type="varchar" MaxLength="50" />
     <Property Name="Company" Type="varchar" MaxLength="50" />
-    <Property Name="Expr1" Type="int" />
     <Property Name="AdressName" Type="nvarchar" MaxLength="50" />
-    <Property Name="phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="OccupationName" Type="nvarchar" MaxLength="50" />
+    <Property Name="AdressId" Type="int" Nullable="false" />
+    <Property Name="OccupationId" Type="int" Nullable="false" />
   </EntityType>
   <EntityContainer Name="itcastModelStoreContainer">
     <EntitySet Name="Adress" EntityType="Self.Adress" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="occupation" EntityType="Self.occupation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User_info" EntityType="Self.User_info" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VMovie" EntityType="Self.VMovie" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
-    [VMovie].[AdressId] AS [AdressId], 
     [VMovie].[Id] AS [Id], 
     [VMovie].[Name] AS [Name], 
     [VMovie].[Age] AS [Age], 
-    [VMovie].[Number] AS [Number], 
     [VMovie].[Company] AS [Company], 
-    [VMovie].[Expr1] AS [Expr1], 
     [VMovie].[AdressName] AS [AdressName], 
-    [VMovie].[phone] AS [phone]
+    [VMovie].[OccupationName] AS [OccupationName], 
+    [VMovie].[AdressId] AS [AdressId], 
+    [VMovie].[OccupationId] AS [OccupationId]
     FROM [dbo].[VMovie] AS [VMovie]</DefiningQuery>
     </EntitySet>
   </EntityContainer>

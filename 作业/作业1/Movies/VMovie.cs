@@ -14,13 +14,13 @@ namespace Movies
     
     public partial class VMovie
     {
-        public int AdressId { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
         public Nullable<int> Age { get; set; }
-        public string Number { get; set; }
         public string Company { get; set; }
         public string AdressName { get; set; }
-        public string phone { get; set; }
+        public string OccupationName { get; set; }
+        public int AdressId { get; set; }
+        public int OccupationId { get; set; }
     }
 }

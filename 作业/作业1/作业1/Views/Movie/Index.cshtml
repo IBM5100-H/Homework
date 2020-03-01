@@ -7,28 +7,51 @@
 <h2>Index</h2>
 
 @Html.ActionLink("添加", "Insert");
+<br />
+<br />
+
 
 
 <form method="post" action="/Movie/Index">
+
+    <a href="/Movie/Index/null-@ViewBag.OccupationId">不限</a>
+    @foreach (var item in ViewBag.adress)
+    {
+        <a href="/Movie/Index/@item.AdressId-@ViewBag.OccupationId">@item.AdressName</a>
+    }
+    <br />
+
+    <a href="/Movie/Index/@ViewBag.AdressId-null">不限</a>
+    @foreach (var item in ViewBag.occupation)
+    {
+        <a href="/Movie/Index/@ViewBag.AdressId-@item.OccupationId">@item.OccupationName</a>
+    }
+    <br />
     Name:<input type="text" name="txtName" /> Age:<input type="text" name="txtAge" /> <input type="submit" />
+    <br />
+
+    <br />
     <table border="1">
         <tr>
             <th>Name</th>
             <th>Age</th>
             <th>Company</th>
             <th>AdressName</th>
+            <th>OccupationName</th>
             <th>操作</th>
+
         </tr>
         @foreach (var item in Model)
         {
 
             <tr>
-                <td> @item.Name</td>
-                <td>@item.Age</td>
+                <td>  @item.Name</td>
+                <td>  @item.Age</td>
                 <td>  @item.Company</td>
                 <td>  @item.AdressName</td>
-                <td><a href="/Movie/Edit/@item.Id">修改</a></td>
-                <td>@Html.ActionLink("删除", "/Movie/Delete/" + item.Id + "") </td>
+                <td>  @item.OccupationName</td>
+                <td><a href="/Movie/Edit/@item.Id">修改</a> &nbsp; @Html.ActionLink("删除", "/Movie/Delete/" + item.Id + "")</td>
+
             </tr>
         }
     </table>

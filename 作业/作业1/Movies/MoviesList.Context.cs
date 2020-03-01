@@ -25,8 +25,9 @@ namespace Movies
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<User_info> User_info { get; set; }
         public virtual DbSet<Adress> Adress { get; set; }
+        public virtual DbSet<occupation> occupation { get; set; }
+        public virtual DbSet<User_info> User_info { get; set; }
         public virtual DbSet<VMovie> VMovie { get; set; }
     }
 }
