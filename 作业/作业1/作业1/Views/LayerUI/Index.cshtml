@@ -2,54 +2,61 @@
 @{
     ViewBag.Title = "Index";
 }
+<script src="~/Content/layui/layui.js"></script>
+<link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    layui.use(['table', 'laypage'], function () {
+        var table = layui.table;
 
-<!DOCTYPE html>
+        table.render({
+            elem: '#LVmovie'
+            , url: '/LayerUI/Read' //数据接口
+            , title: '用户表'
+            , cellMinWidth: 150
+            , page: true //开启分页
+            , limit:5
+            , limits:[5,6,7,8,9,10]
+            , toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-    <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
-    <script src="~/Content/layui/layui.js"></script>
-    <script>
-        //使用一个table组件
-        layui.use('table', function () {
-            //声明一个变量 它代表table组件
-            var table = layui.table;
-            //初始化组件
-            table.render({
-                //
-                elem: '#tdMovie',
-                toolbar: '#toolbarDemo',
-                url: '/layerui/read/'//远程数据接口   出数据
-                , cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-                , cols: [[
-                 { type: 'radio' },
-                 { field: 'Name', width: 80, title: 'Name', sort: true }
-                , { field: 'AdressName', width: 80, title: 'AdressName' }
-                , { field: 'Age', width: 80, title: 'Age', sort: true }
-                , { field: 'Company', title: 'Company', width: '30%', minWidth: 100 } //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
-                , { field: 'OccupationName', title: 'OccupationName', sort: true }
-               ]]
-            });
+            , cols: [[ //表头
+                { type: 'checkbox', fixed: 'left' }
+                , { field: 'cname', title: 'cname', sort: 'true' }
+                , { field: 'createtime', title: 'createtime', sort: 'true' }
+                , { field: 'mname', title: 'mname', sort: 'true' }
+                , { field: 'tname', title: 'tname', sort: 'true' }
+                , { fixed: 'right', width: 165, align: 'center', toolbar: '#barDemo' }
+            ]]
         });
 
+        table.on('tool(test)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'detail') {
+                layer.msg('ID：' + data.mid + ' 的查看操作');
+            }
+            else if (obj.event === 'del') {
+                layer.confirm('真的删除行么', function (index) {
 
-    </script>
-    <script type="text/html" id="toolbarDemo">
-        <div class="layui-btn-container">
-            <button class="layui-btn layui-btn-sm" lay-event="getCheckData">获取选中行数据</button>
-        </div>
-    </script>
-</head>
-<body>
-    所有组件类前端框架 都是通过Ajax来进行数据加载。
-    组件类型框架原理：
-    1需要将页面的一个html元素  初始化为一个组件
-    2通过远程访问接口的方式 获取相应的数据
-    3为组件附上数据
-    4完成组件的渲染
-    <table id="tdMovie"></table>
+                    $.post("/LayerUI/del", { id: data.mid }, function (res) {
+                        layer.msg(res.message);
+                    });
+                    obj.del();
 
-</body>
-</html>
+                    layer.close(index);
+                });
+            }
+            else if (obj.event === 'edit') {
+                layer.alert('编辑行：<br>' + JSON.stringify(data))
+            }
+        });
+       
+    });
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+
+</script>
+
+<table id="LVmovie" lay-filter="test"></table>

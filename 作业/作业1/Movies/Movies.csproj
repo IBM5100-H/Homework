@@ -53,7 +53,28 @@
     <Compile Include="Adress.cs">
       <DependentUpon>MoviesList.tt</DependentUpon>
     </Compile>
+    <Compile Include="country.cs">
+      <DependentUpon>MovieEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Movie.cs">
+      <DependentUpon>MovieEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="MovieDetailMV.cs" />
+    <Compile Include="MovieEntity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MovieEntity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MovieEntity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MovieEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MovieEntity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MovieEntity.edmx</DependentUpon>
+    </Compile>
     <Compile Include="MoviesList.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -69,6 +90,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MoviesList.edmx</DependentUpon>
     </Compile>
+    <Compile Include="movietype.cs">
+      <DependentUpon>MovieEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="occupation.cs">
       <DependentUpon>MoviesList.tt</DependentUpon>
     </Compile>
@@ -79,6 +103,9 @@
     <Compile Include="VMovie.cs">
       <DependentUpon>MoviesList.tt</DependentUpon>
     </Compile>
+    <Compile Include="VMovieses.cs">
+      <DependentUpon>MovieEntity.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="MoviesList.edmx">
@@ -88,12 +115,29 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
+    <EntityDeploy Include="MovieEntity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MovieEntity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="MovieEntity.edmx.diagram">
+      <DependentUpon>MovieEntity.edmx</DependentUpon>
+    </None>
     <None Include="MoviesList.edmx.diagram">
       <DependentUpon>MoviesList.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MovieEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MovieEntity.edmx</DependentUpon>
+      <LastGenOutput>MovieEntity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="MovieEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>MovieEntity.edmx</DependentUpon>
+      <LastGenOutput>MovieEntity.cs</LastGenOutput>
+    </Content>
     <Content Include="MoviesList.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MoviesList.Context.cs</LastGenOutput>

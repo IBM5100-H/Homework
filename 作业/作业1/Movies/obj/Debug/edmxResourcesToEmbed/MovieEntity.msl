@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MovieModelStoreContainer" CdmEntityContainer="MovieEntities">
+    <EntitySetMapping Name="country">
+      <EntityTypeMapping TypeName="MovieModel.country">
+        <MappingFragment StoreEntitySet="country">
+          <ScalarProperty Name="cid" ColumnName="cid" />
+          <ScalarProperty Name="cname" ColumnName="cname" />
+          <ScalarProperty Name="createtime" ColumnName="createtime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Movie">
+      <EntityTypeMapping TypeName="MovieModel.Movie">
+        <MappingFragment StoreEntitySet="Movie">
+          <ScalarProperty Name="mid" ColumnName="mid" />
+          <ScalarProperty Name="mname" ColumnName="mname" />
+          <ScalarProperty Name="createtime" ColumnName="createtime" />
+          <ScalarProperty Name="tid" ColumnName="tid" />
+          <ScalarProperty Name="cid" ColumnName="cid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="movietype">
+      <EntityTypeMapping TypeName="MovieModel.movietype">
+        <MappingFragment StoreEntitySet="movietype">
+          <ScalarProperty Name="tid" ColumnName="tid" />
+          <ScalarProperty Name="tname" ColumnName="tname" />
+          <ScalarProperty Name="createtime" ColumnName="createtime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VMovieses">
+      <EntityTypeMapping TypeName="MovieModel.VMovieses">
+        <MappingFragment StoreEntitySet="VMovieses">
+          <ScalarProperty Name="mid" ColumnName="mid" />
+          <ScalarProperty Name="cname" ColumnName="cname" />
+          <ScalarProperty Name="mname" ColumnName="mname" />
+          <ScalarProperty Name="createtime" ColumnName="createtime" />
+          <ScalarProperty Name="tid" ColumnName="tid" />
+          <ScalarProperty Name="cid" ColumnName="cid" />
+          <ScalarProperty Name="tname" ColumnName="tname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

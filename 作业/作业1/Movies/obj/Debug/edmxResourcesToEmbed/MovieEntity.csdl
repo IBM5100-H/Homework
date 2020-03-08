@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MovieModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="country">
+    <Key>
+      <PropertyRef Name="cid" />
+    </Key>
+    <Property Name="cid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="createtime" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Movie">
+    <Key>
+      <PropertyRef Name="mid" />
+    </Key>
+    <Property Name="mid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="mname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="createtime" Type="DateTime" Precision="3" />
+    <Property Name="tid" Type="Int32" />
+    <Property Name="cid" Type="Int32" />
+  </EntityType>
+  <EntityType Name="movietype">
+    <Key>
+      <PropertyRef Name="tid" />
+    </Key>
+    <Property Name="tid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="createtime" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="VMovieses">
+    <Key>
+      <PropertyRef Name="mid" />
+    </Key>
+    <Property Name="mid" Type="Int32" Nullable="false" />
+    <Property Name="cname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="mname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="createtime" Type="DateTime" Precision="3" />
+    <Property Name="tid" Type="Int32" />
+    <Property Name="cid" Type="Int32" />
+    <Property Name="tname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="MovieEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="country" EntityType="Self.country" />
+    <EntitySet Name="Movie" EntityType="Self.Movie" />
+    <EntitySet Name="movietype" EntityType="Self.movietype" />
+    <EntitySet Name="VMovieses" EntityType="Self.VMovieses" />
+  </EntityContainer>
+</Schema>

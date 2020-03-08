@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MovieModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="country">
+          <Key>
+            <PropertyRef Name="cid" />
+          </Key>
+          <Property Name="cid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cname" Type="nvarchar" MaxLength="50" />
+          <Property Name="createtime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="mid" />
+          </Key>
+          <Property Name="mid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mname" Type="nvarchar" MaxLength="50" />
+          <Property Name="createtime" Type="datetime" />
+          <Property Name="tid" Type="int" />
+          <Property Name="cid" Type="int" />
+        </EntityType>
+        <EntityType Name="movietype">
+          <Key>
+            <PropertyRef Name="tid" />
+          </Key>
+          <Property Name="tid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tname" Type="nvarchar" MaxLength="50" />
+          <Property Name="createtime" Type="datetime" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Movie.dbo.VMovieses”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="VMovieses">
+          <Key>
+            <PropertyRef Name="mid" />
+          </Key>
+          <Property Name="mid" Type="int" Nullable="false" />
+          <Property Name="cname" Type="nvarchar" MaxLength="50" />
+          <Property Name="mname" Type="nvarchar" MaxLength="50" />
+          <Property Name="createtime" Type="datetime" />
+          <Property Name="tid" Type="int" />
+          <Property Name="cid" Type="int" />
+          <Property Name="tname" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="MovieModelStoreContainer">
+          <EntitySet Name="country" EntityType="Self.country" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movie" EntityType="Self.Movie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="movietype" EntityType="Self.movietype" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VMovieses" EntityType="Self.VMovieses" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VMovieses].[mid] AS [mid], 
+    [VMovieses].[cname] AS [cname], 
+    [VMovieses].[mname] AS [mname], 
+    [VMovieses].[createtime] AS [createtime], 
+    [VMovieses].[tid] AS [tid], 
+    [VMovieses].[cid] AS [cid], 
+    [VMovieses].[tname] AS [tname]
+    FROM [dbo].[VMovieses] AS [VMovieses]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MovieModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="country">
+          <Key>
+            <PropertyRef Name="cid" />
+          </Key>
+          <Property Name="cid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="createtime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="mid" />
+          </Key>
+          <Property Name="mid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="createtime" Type="DateTime" Precision="3" />
+          <Property Name="tid" Type="Int32" />
+          <Property Name="cid" Type="Int32" />
+        </EntityType>
+        <EntityType Name="movietype">
+          <Key>
+            <PropertyRef Name="tid" />
+          </Key>
+          <Property Name="tid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="createtime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="VMovieses">
+          <Key>
+            <PropertyRef Name="mid" />
+          </Key>
+          <Property Name="mid" Type="Int32" Nullable="false" />
+          <Property Name="cname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="createtime" Type="DateTime" Precision="3" />
+          <Property Name="tid" Type="Int32" />
+          <Property Name="cid" Type="Int32" />
+          <Property Name="tname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="MovieEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="country" EntityType="Self.country" />
+          <EntitySet Name="Movie" EntityType="Self.Movie" />
+          <EntitySet Name="movietype" EntityType="Self.movietype" />
+          <EntitySet Name="VMovieses" EntityType="Self.VMovieses" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MovieModelStoreContainer" CdmEntityContainer="MovieEntities">
+          <EntitySetMapping Name="country">
+            <EntityTypeMapping TypeName="MovieModel.country">
+              <MappingFragment StoreEntitySet="country">
+                <ScalarProperty Name="cid" ColumnName="cid" />
+                <ScalarProperty Name="cname" ColumnName="cname" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movie">
+            <EntityTypeMapping TypeName="MovieModel.Movie">
+              <MappingFragment StoreEntitySet="Movie">
+                <ScalarProperty Name="mid" ColumnName="mid" />
+                <ScalarProperty Name="mname" ColumnName="mname" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="tid" ColumnName="tid" />
+                <ScalarProperty Name="cid" ColumnName="cid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="movietype">
+            <EntityTypeMapping TypeName="MovieModel.movietype">
+              <MappingFragment StoreEntitySet="movietype">
+                <ScalarProperty Name="tid" ColumnName="tid" />
+                <ScalarProperty Name="tname" ColumnName="tname" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VMovieses">
+            <EntityTypeMapping TypeName="MovieModel.VMovieses">
+              <MappingFragment StoreEntitySet="VMovieses">
+                <ScalarProperty Name="mid" ColumnName="mid" />
+                <ScalarProperty Name="cname" ColumnName="cname" />
+                <ScalarProperty Name="mname" ColumnName="mname" />
+                <ScalarProperty Name="createtime" ColumnName="createtime" />
+                <ScalarProperty Name="tid" ColumnName="tid" />
+                <ScalarProperty Name="cid" ColumnName="cid" />
+                <ScalarProperty Name="tname" ColumnName="tname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
