@@ -258,6 +258,7 @@
     <Content Include="Views\Ajax\Insert.cshtml" />
     <Content Include="Views\Ajax\Edit.cshtml" />
     <Content Include="Views\LayerUI\Index.cshtml" />
+    <Content Include="Views\LayerUI\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

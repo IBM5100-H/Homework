@@ -28,7 +28,7 @@ namespace 作业1.Controllers
 
             return Json(ht, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult del(string id)
+        public ActionResult Del(string id)
         {
             Hashtable ht = new Hashtable();
             var movie = MovieEntities.Movie.Find(Convert.ToInt32(id));
@@ -44,6 +44,14 @@ namespace 作业1.Controllers
                 ht["message"] = "删除失败";
             }
             return Json(ht);
+        }
+
+        public ActionResult Edit()
+        {
+            ViewBag.country = MovieEntities.country;
+            ViewBag.movietype = MovieEntities.movietype;    
+
+            return View();
         }
     }
 }

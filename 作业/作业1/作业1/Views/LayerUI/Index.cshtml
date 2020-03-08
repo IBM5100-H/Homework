@@ -15,15 +15,15 @@
             , title: '用户表'
             , cellMinWidth: 150
             , page: true //开启分页
-            , limit:5
-            , limits:[5,6,7,8,9,10]
+            , limit: 5
+            , limits: [5, 6, 7, 8, 9, 10]
             , toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
 
             , cols: [[ //表头
                 { type: 'checkbox', fixed: 'left' }
-                , { field: 'cname', title: 'cname', sort: 'true' }
-                , { field: 'createtime', title: 'createtime', sort: 'true' }
                 , { field: 'mname', title: 'mname', sort: 'true' }
+                , { field: 'createtime', title: 'createtime', sort: 'true' }
+                , { field: 'cname', title: 'cname', sort: 'true' }
                 , { field: 'tname', title: 'tname', sort: 'true' }
                 , { fixed: 'right', width: 165, align: 'center', toolbar: '#barDemo' }
             ]]
@@ -37,7 +37,7 @@
             else if (obj.event === 'del') {
                 layer.confirm('真的删除行么', function (index) {
 
-                    $.post("/LayerUI/del", { id: data.mid }, function (res) {
+                    $.post("/LayerUI/Del", { id: data.mid }, function (res) {
                         layer.msg(res.message);
                     });
                     obj.del();
@@ -46,10 +46,25 @@
                 });
             }
             else if (obj.event === 'edit') {
-                layer.alert('编辑行：<br>' + JSON.stringify(data))
+                //layer.alert('编辑行：<br>' + JSON.stringify(data))
+
+                layer.open({
+                    type: 2,
+                    //content: '/LayerUI/Edit' //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+                    content: ['/LayerUI/Edit', 'no']
+                    , area: ['50%', '80%']
+                    , success: function (layero, index) {    //成功获得加载changefile.html时，预先加载，将值从父窗口传到 子窗口
+                        //// console.log(obj.data.editAble);
+                        let body = layer.getChildFrame('body', index);
+                        body.find("#mname").val(data.mname);
+                        body.find("#tname").val(data.tid);   //通过class名进行获取数据
+                        body.find("#cname").val(data.cid);
+                        body.find("#mid").val(data.mid);
+                    },
+                });
             }
         });
-       
+
     });
 </script>
 <script type="text/html" id="barDemo">
