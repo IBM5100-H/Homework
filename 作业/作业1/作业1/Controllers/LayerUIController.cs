@@ -25,8 +25,9 @@ namespace 作业1.Controllers
             ht["code"] = 0;
             ht["msg"] = "";
             ht["count"] = list.Count();
-            ht["data"] = list.SqlQuery("select top ("+ limit + ") * from(select row_number()over(order by  mid) as rownumber, *from [VMovieses]) temp_row where rownumber > ((" + page+ " - 1) * " + limit + ")").ToList();
-
+            ht["data"] = list.SqlQuery("select top ("+ limit + ") *" +                                       //分页
+                " from(select row_number()over(order by  mid) as rownumber," +
+                " *from [VMovieses]) temp_row where rownumber > ((" + page+ " - 1) * " + limit + ")");
             return Json(ht, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Del(string id)
@@ -38,24 +39,22 @@ namespace 作业1.Controllers
                 MovieEntities.Movie.Remove(movie);
                 MovieEntities.SaveChanges();
                 ht["message"] = "删除成功";
-                ht["result"] = "ture";
+                ht["result"] = "true";
             }
             else
             {
+                ht["result"] = "false";
                 ht["message"] = "删除失败";
             }
             return Json(ht);
         }
-
         [HttpGet]
         public ActionResult Edit()
         {
             ViewBag.country = MovieEntities.country;
             ViewBag.movietype = MovieEntities.movietype;    
-
             return View();
         }
-
         [HttpPost]
         public ActionResult Edit(string obj)
         {
@@ -66,12 +65,9 @@ namespace 作业1.Controllers
             newmovie.tid = model.tid;
             newmovie.cid = model.cid;
             newmovie.mname = model.mname;
-
             bool n=TryUpdateModel<Movie>(newmovie);
-
             MovieEntities.SaveChanges();
             Hashtable ht = new Hashtable();
-
             if (n)
             {
                 ht["result"] = "true";
@@ -82,8 +78,6 @@ namespace 作业1.Controllers
                 ht["result"] = "false";
                 ht["message"] = "编辑失败";
             }
-
-
             return Json(ht);
         }
     }

@@ -6,25 +6,10 @@
 <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 
-}
-<script type="text/html" id="formatDate">
-    {{FormatToDate(d.createtime) }}
-</script>
 <script>
-
-
-    function FormatToDate(val) {
-  
-        var date = new Date(parseInt(val.replace("/Date(", "").replace(")/", ""), 10));
-        //月份为0-11，所以+1，月份小于10时补个0
-        var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
-        var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-        return date.getFullYear() + "-" + month + "-" + currentDate;
-    }
 
     layui.use(['table', 'laypage'], function () {
         var table = layui.table;
-
         table.render({
             elem: '#LVmovie'
             , url: '/LayerUI/Read' //数据接口
@@ -34,11 +19,10 @@
             , limit: 5
             , limits: [5, 6, 7, 8, 9, 10]
             , toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
-
             , cols: [[ //表头
                 { type: 'checkbox', fixed: 'left' }
                 , { field: 'mname', title: 'mname', sort: 'true' }
-                , { field: 'createtime', title: 'createtime', sort: 'true',templet:'#formatDate'}                
+                , { field: 'createtime', title: 'createtime', sort: 'true', templet: '#formatDate' }
                 , { field: 'cname', title: 'cname', sort: 'true' }
                 , { field: 'tname', title: 'tname', sort: 'true' }
                 , { fixed: 'right', width: 165, align: 'center', toolbar: '#barDemo' }
@@ -52,25 +36,20 @@
             }
             else if (obj.event === 'del') {
                 layer.confirm('真的删除行么', function (index) {
-
                     $.post("/LayerUI/Del", { id: data.mid }, function (res) {
                         layer.msg(res.message);
                     });
                     obj.del();
-
                     layer.close(index);
                 });
             }
             else if (obj.event === 'edit') {
                 //layer.alert('编辑行：<br>' + JSON.stringify(data))
-
                 layer.open({
-                    type: 2,
-                    //content: '/LayerUI/Edit' //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+                    type: 2,                  
                     content: ['/LayerUI/Edit', 'no']
                     , area: ['50%', '80%']
                     , success: function (layero, index) {    //成功获得加载changefile.html时，预先加载，将值从父窗口传到 子窗口
-                        //// console.log(obj.data.editAble);
                         let body = layer.getChildFrame('body', index);
                         body.find("#mname").val(data.mname);
                         body.find("#tname").val(data.tid);   //通过class名进行获取数据
@@ -85,12 +64,22 @@
         });
 
     });
+    function FormatToDate(val) {
+        var date = new Date(parseInt(val.replace("/Date(", "").replace(")/", ""), 10));
+        //月份为0-11，所以+1，月份小于10时补个0
+        var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+        var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+        return date.getFullYear() + "-" + month + "-" + currentDate;
+    }
+</script>
+
+<script type="text/html" id="formatDate">
+    {{FormatToDate(d.createtime) }}
 </script>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-
 </script>
 
 <table id="LVmovie" lay-filter="test"></table>
