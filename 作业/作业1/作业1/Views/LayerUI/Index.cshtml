@@ -5,7 +5,23 @@
 <script src="~/Content/layui/layui.js"></script>
 <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+}
+<script type="text/html" id="formatDate">
+    {{FormatToDate(d.createtime) }}
+</script>
 <script>
+
+
+    function FormatToDate(val) {
+  
+        var date = new Date(parseInt(val.replace("/Date(", "").replace(")/", ""), 10));
+        //月份为0-11，所以+1，月份小于10时补个0
+        var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+        var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+        return date.getFullYear() + "-" + month + "-" + currentDate;
+    }
+
     layui.use(['table', 'laypage'], function () {
         var table = layui.table;
 
@@ -22,7 +38,7 @@
             , cols: [[ //表头
                 { type: 'checkbox', fixed: 'left' }
                 , { field: 'mname', title: 'mname', sort: 'true' }
-                , { field: 'createtime', title: 'createtime', sort: 'true' }
+                , { field: 'createtime', title: 'createtime', sort: 'true',templet:'#formatDate'}                
                 , { field: 'cname', title: 'cname', sort: 'true' }
                 , { field: 'tname', title: 'tname', sort: 'true' }
                 , { fixed: 'right', width: 165, align: 'center', toolbar: '#barDemo' }
@@ -60,7 +76,10 @@
                         body.find("#tname").val(data.tid);   //通过class名进行获取数据
                         body.find("#cname").val(data.cid);
                         body.find("#mid").val(data.mid);
-                    },
+                    }
+                    , end: function () {
+                        table.reload('LVmovie', {})
+                    }
                 });
             }
         });

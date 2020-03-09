@@ -262,3 +262,5 @@ D:\Users\MovieClass\Homework\作业\作业1\作业1\obj\Debug\作业1.csproj.Cor
 D:\Users\MovieClass\Homework\作业\作业1\作业1\obj\Debug\作业1.csproj.CopyComplete
 D:\Users\MovieClass\Homework\作业\作业1\作业1\obj\Debug\作业1.dll
 D:\Users\MovieClass\Homework\作业\作业1\作业1\obj\Debug\作业1.pdb
+D:\Users\MovieClass\Homework\作业\作业1\作业1\bin\Newtonsoft.Json.dll
+D:\Users\MovieClass\Homework\作业\作业1\作业1\bin\Newtonsoft.Json.xml

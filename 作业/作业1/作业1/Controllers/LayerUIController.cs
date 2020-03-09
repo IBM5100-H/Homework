@@ -1,4 +1,5 @@
 ﻿using Movies;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -46,12 +47,44 @@ namespace 作业1.Controllers
             return Json(ht);
         }
 
+        [HttpGet]
         public ActionResult Edit()
         {
             ViewBag.country = MovieEntities.country;
             ViewBag.movietype = MovieEntities.movietype;    
 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Edit(string obj)
+        {
+            ViewBag.country = MovieEntities.country;
+            ViewBag.movietype = MovieEntities.movietype;
+            Movie model = JsonConvert.DeserializeObject<Movie>(obj);
+            var newmovie = MovieEntities.Movie.Find(model.mid);
+            newmovie.tid = model.tid;
+            newmovie.cid = model.cid;
+            newmovie.mname = model.mname;
+
+            bool n=TryUpdateModel<Movie>(newmovie);
+
+            MovieEntities.SaveChanges();
+            Hashtable ht = new Hashtable();
+
+            if (n)
+            {
+                ht["result"] = "true";
+                ht["message"] = "编辑成功";
+            }
+            else
+            {
+                ht["result"] = "false";
+                ht["message"] = "编辑失败";
+            }
+
+
+            return Json(ht);
         }
     }
 }
